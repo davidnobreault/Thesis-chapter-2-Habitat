@@ -1,0 +1,1940 @@
+----------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  H:\DBreault\marten\log_margins_6jun2019.log
+  log type:  text
+ opened on:   1 Sep 2019, 15:58:29
+
+. 
+. import excel using biweek_detect_covariates_18dec2018_v08, first clear
+
+. 
+. destring detect, replace
+detect: all characters numeric; replaced as byte
+
+. 
+. *graph predicted probability with 95%CI with cut_100 as indep var
+. 
+. melogit detect cut_100 edge_100 quad_edge_100 roads_100 quad_road_100 cluster year AvgOfAvgOfTemp_C|| gr
+> id_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -309.20492  
+Iteration 1:   log likelihood = -308.53515  
+Iteration 2:   log likelihood = -308.53377  
+Iteration 3:   log likelihood = -308.53377  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -299.61525
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -299.61525  
+Iteration 1:   log likelihood = -298.99508  
+Iteration 2:   log likelihood = -298.87921  
+Iteration 3:   log likelihood = -298.87863  
+Iteration 4:   log likelihood = -298.87863  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(8)      =      18.89
+Log likelihood = -298.87863                     Prob > chi2       =     0.0154
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+         cut_100 |    -.02337    .011416    -2.05   0.041    -.0457449   -.0009951
+        edge_100 |   .1310523   .2583695     0.51   0.612    -.3753427    .6374472
+   quad_edge_100 |  -.0101272   .0480569    -0.21   0.833     -.104317    .0840625
+       roads_100 |   .6405555   .6010908     1.07   0.287    -.5375608    1.818672
+   quad_road_100 |  -.2438534    .161609    -1.51   0.131    -.5606012    .0728944
+         cluster |  -.1328773   .4057775    -0.33   0.743    -.9281866     .662432
+            year |   .6904598   .4222586     1.64   0.102    -.1371519    1.518071
+AvgOfAvgOfTemp_C |  -.1339795    .055406    -2.42   0.016    -.2425732   -.0253857
+           _cons |  -1.228145   .6911409    -1.78   0.076    -2.582756    .1264667
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   .8186808   .3258895                      .3752146     1.78628
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 19.31       Prob >= chibar2 = 0.0000
+
+. summarize cut_100
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     cut_100 |        537    6.563375    19.07959          0        100
+
+. margins, at(cut_100=(0(10)100)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : cut_100         =           0
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : cut_100         =          10
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : cut_100         =          20
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : cut_100         =          30
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : cut_100         =          40
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : cut_100         =          50
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : cut_100         =          60
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : cut_100         =          70
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : cut_100         =          80
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : cut_100         =          90
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : cut_100         =         100
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .3084901   .0305035    10.11   0.000     .2487044    .3682757
+          2  |   .2669996   .0280548     9.52   0.000     .2120132     .321986
+          3  |   .2289234   .0357043     6.41   0.000     .1589443    .2989024
+          4  |    .194518    .045073     4.32   0.000     .1061765    .2828595
+          5  |   .1638842    .052621     3.11   0.002     .0607489    .2670195
+          6  |   .1369836   .0574933     2.38   0.017     .0242988    .2496684
+          7  |   .1136642     .05971     1.90   0.057    -.0033653    .2306936
+          8  |   .0936884   .0596184     1.57   0.116    -.0231616    .2105383
+          9  |   .0767616   .0576887     1.33   0.183    -.0363062    .1898295
+         10  |   .0625586   .0544127     1.15   0.250    -.0440883    .1692056
+         11  |   .0507451   .0502474     1.01   0.313     -.047738    .1492283
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: cut_100
+
+. graph save Graph "H:\DBreault\marten\marginsplot_cut_100_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_cut_100_6jun2019.gph saved)
+
+. 
+. *repeat for all covariates in model except cluster and year (categorical independent variables)
+. 
+. melogit detect cut_100 edge_100 quad_edge_100 roads_100 quad_road_100 cluster year AvgOfAvgOfTemp_C|| gr
+> id_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -309.20492  
+Iteration 1:   log likelihood = -308.53515  
+Iteration 2:   log likelihood = -308.53377  
+Iteration 3:   log likelihood = -308.53377  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -299.61525
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -299.61525  
+Iteration 1:   log likelihood = -298.99508  
+Iteration 2:   log likelihood = -298.87921  
+Iteration 3:   log likelihood = -298.87863  
+Iteration 4:   log likelihood = -298.87863  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(8)      =      18.89
+Log likelihood = -298.87863                     Prob > chi2       =     0.0154
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+         cut_100 |    -.02337    .011416    -2.05   0.041    -.0457449   -.0009951
+        edge_100 |   .1310523   .2583695     0.51   0.612    -.3753427    .6374472
+   quad_edge_100 |  -.0101272   .0480569    -0.21   0.833     -.104317    .0840625
+       roads_100 |   .6405555   .6010908     1.07   0.287    -.5375608    1.818672
+   quad_road_100 |  -.2438534    .161609    -1.51   0.131    -.5606012    .0728944
+         cluster |  -.1328773   .4057775    -0.33   0.743    -.9281866     .662432
+            year |   .6904598   .4222586     1.64   0.102    -.1371519    1.518071
+AvgOfAvgOfTemp_C |  -.1339795    .055406    -2.42   0.016    -.2425732   -.0253857
+           _cons |  -1.228145   .6911409    -1.78   0.076    -2.582756    .1264667
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   .8186808   .3258895                      .3752146     1.78628
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 19.31       Prob >= chibar2 = 0.0000
+
+. summarize edge_100
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    edge_100 |        537    1.563365    1.709867          0   7.269306
+
+. margins, at(edge_100=(0(0.5)7.269306)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : cut_100         =    6.563375 (mean)
+               edge_100        =           0
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : cut_100         =    6.563375 (mean)
+               edge_100        =          .5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : cut_100         =    6.563375 (mean)
+               edge_100        =           1
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : cut_100         =    6.563375 (mean)
+               edge_100        =         1.5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : cut_100         =    6.563375 (mean)
+               edge_100        =           2
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : cut_100         =    6.563375 (mean)
+               edge_100        =         2.5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : cut_100         =    6.563375 (mean)
+               edge_100        =           3
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : cut_100         =    6.563375 (mean)
+               edge_100        =         3.5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : cut_100         =    6.563375 (mean)
+               edge_100        =           4
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : cut_100         =    6.563375 (mean)
+               edge_100        =         4.5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : cut_100         =    6.563375 (mean)
+               edge_100        =           5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+12._at       : cut_100         =    6.563375 (mean)
+               edge_100        =         5.5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+13._at       : cut_100         =    6.563375 (mean)
+               edge_100        =           6
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+14._at       : cut_100         =    6.563375 (mean)
+               edge_100        =         6.5
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+15._at       : cut_100         =    6.563375 (mean)
+               edge_100        =           7
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .2462589   .0699583     3.52   0.000     .1091432    .3833747
+          2  |   .2570447    .052284     4.92   0.000       .15457    .3595194
+          3  |   .2681062   .0361191     7.42   0.000     .1973141    .3388984
+          4  |   .2794364   .0273353    10.22   0.000     .2258602    .3330127
+          5  |   .2910272   .0346645     8.40   0.000      .223086    .3589684
+          6  |   .3028695   .0529642     5.72   0.000     .1990616    .4066774
+          7  |   .3149532   .0754298     4.18   0.000     .1671135    .4627929
+          8  |   .3272673   .0998899     3.28   0.001     .1314866     .523048
+          9  |   .3397997   .1256243     2.70   0.007     .0935806    .5860188
+         10  |   .3525374   .1523037     2.31   0.021     .0540276    .6510472
+         11  |   .3654666   .1797262     2.03   0.042     .0132098    .7177234
+         12  |   .3785726   .2077372     1.82   0.068    -.0285849    .7857301
+         13  |   .3918397   .2362019     1.66   0.097    -.0711075     .854787
+         14  |   .4052519   .2649931     1.53   0.126     -.114125    .9246288
+         15  |   .4187922   .2939865     1.42   0.154    -.1574108    .9949952
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: edge_100
+
+. graph save Graph "H:\DBreault\marten\marginsplot_edge_100_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_edge_100_6jun2019.gph saved)
+
+. 
+. melogit detect cut_100 edge_100 quad_edge_100 roads_100 quad_road_100 cluster year AvgOfAvgOfTemp_C|| gr
+> id_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -309.20492  
+Iteration 1:   log likelihood = -308.53515  
+Iteration 2:   log likelihood = -308.53377  
+Iteration 3:   log likelihood = -308.53377  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -299.61525
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -299.61525  
+Iteration 1:   log likelihood = -298.99508  
+Iteration 2:   log likelihood = -298.87921  
+Iteration 3:   log likelihood = -298.87863  
+Iteration 4:   log likelihood = -298.87863  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(8)      =      18.89
+Log likelihood = -298.87863                     Prob > chi2       =     0.0154
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+         cut_100 |    -.02337    .011416    -2.05   0.041    -.0457449   -.0009951
+        edge_100 |   .1310523   .2583695     0.51   0.612    -.3753427    .6374472
+   quad_edge_100 |  -.0101272   .0480569    -0.21   0.833     -.104317    .0840625
+       roads_100 |   .6405555   .6010908     1.07   0.287    -.5375608    1.818672
+   quad_road_100 |  -.2438534    .161609    -1.51   0.131    -.5606012    .0728944
+         cluster |  -.1328773   .4057775    -0.33   0.743    -.9281866     .662432
+            year |   .6904598   .4222586     1.64   0.102    -.1371519    1.518071
+AvgOfAvgOfTemp_C |  -.1339795    .055406    -2.42   0.016    -.2425732   -.0253857
+           _cons |  -1.228145   .6911409    -1.78   0.076    -2.582756    .1264667
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   .8186808   .3258895                      .3752146     1.78628
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 19.31       Prob >= chibar2 = 0.0000
+
+. summarize quad_edge_100
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+quad_edg~100 |        537    5.362311     9.52061          0   52.84281
+
+. margins, at(quad_edge_100=(0(5)52.84281)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =           0
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =           5
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          10
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          15
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          20
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          25
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          30
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          35
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          40
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          45
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =          50
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .2905059   .0543863     5.34   0.000     .1839107    .3971011
+          2  |   .2815351   .0275931    10.20   0.000     .2274536    .3356167
+          3  |   .2727191   .0463519     5.88   0.000      .181871    .3635673
+          4  |   .2640616   .0821315     3.22   0.001     .1030869    .4250364
+          5  |   .2555662   .1190661     2.15   0.032      .022201    .4889315
+          6  |    .247236    .155139     1.59   0.111    -.0568309    .5513029
+          7  |   .2390737    .189873     1.26   0.208    -.1330706     .611218
+          8  |   .2310818   .2230902     1.04   0.300    -.2061669    .6683305
+          9  |   .2232623   .2547051     0.88   0.381    -.2759506    .7224753
+         10  |    .215617   .2846716     0.76   0.449    -.3423292    .7735632
+         11  |   .2081471   .3129641     0.67   0.506    -.4052513    .8215456
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: quad_edge_100
+
+. graph save Graph "H:\DBreault\marten\marginsplot_quad_edge_100_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_quad_edge_100_6jun2019.gph saved)
+
+. 
+. melogit detect cut_100 edge_100 quad_edge_100 roads_100 quad_road_100 cluster year AvgOfAvgOfTemp_C|| gr
+> id_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -309.20492  
+Iteration 1:   log likelihood = -308.53515  
+Iteration 2:   log likelihood = -308.53377  
+Iteration 3:   log likelihood = -308.53377  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -299.61525
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -299.61525  
+Iteration 1:   log likelihood = -298.99508  
+Iteration 2:   log likelihood = -298.87921  
+Iteration 3:   log likelihood = -298.87863  
+Iteration 4:   log likelihood = -298.87863  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(8)      =      18.89
+Log likelihood = -298.87863                     Prob > chi2       =     0.0154
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+         cut_100 |    -.02337    .011416    -2.05   0.041    -.0457449   -.0009951
+        edge_100 |   .1310523   .2583695     0.51   0.612    -.3753427    .6374472
+   quad_edge_100 |  -.0101272   .0480569    -0.21   0.833     -.104317    .0840625
+       roads_100 |   .6405555   .6010908     1.07   0.287    -.5375608    1.818672
+   quad_road_100 |  -.2438534    .161609    -1.51   0.131    -.5606012    .0728944
+         cluster |  -.1328773   .4057775    -0.33   0.743    -.9281866     .662432
+            year |   .6904598   .4222586     1.64   0.102    -.1371519    1.518071
+AvgOfAvgOfTemp_C |  -.1339795    .055406    -2.42   0.016    -.2425732   -.0253857
+           _cons |  -1.228145   .6911409    -1.78   0.076    -2.582756    .1264667
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   .8186808   .3258895                      .3752146     1.78628
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 19.31       Prob >= chibar2 = 0.0000
+
+. summarize roads_100
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   roads_100 |        537    1.674556    .9471558          0   3.946626
+
+. margins, at(roads_100=(0(0.2)3.946626)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =           0
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =          .2
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =          .4
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =          .6
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =          .8
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =           1
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         1.2
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         1.4
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         1.6
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         1.8
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =           2
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+12._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         2.2
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+13._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         2.4
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+14._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         2.6
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+15._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         2.8
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+16._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =           3
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+17._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         3.2
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+18._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         3.4
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+19._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         3.6
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+20._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =         3.8
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1309186   .1059541     1.24   0.217    -.0767477    .3385848
+          2  |   .1447215   .1012947     1.43   0.153    -.0538124    .3432554
+          3  |   .1596192   .0948693     1.68   0.092    -.0263212    .3455596
+          4  |   .1756358   .0865956     2.03   0.043     .0059115    .3453601
+          5  |   .1927856   .0764586     2.52   0.012     .0429296    .3426416
+          6  |   .2110716   .0645663     3.27   0.001     .0845239    .3376192
+          7  |   .2304841   .0513031     4.49   0.000     .1299319    .3310364
+          8  |   .2510003   .0378542     6.63   0.000     .1768074    .3251932
+          9  |   .2725828   .0281718     9.68   0.000     .2173671    .3277985
+         10  |   .2951795   .0307975     9.58   0.000     .2348175    .3555415
+         11  |   .3187236   .0461324     6.91   0.000     .2283058    .4091413
+         12  |   .3431335   .0673903     5.09   0.000     .2110509    .4752161
+         13  |   .3683139   .0914072     4.03   0.000      .189159    .5474688
+         14  |   .3941565   .1169452     3.37   0.001     .1649481    .6233649
+         15  |   .4205417   .1432973     2.93   0.003     .1396843    .7013992
+         16  |   .4473404   .1699147     2.63   0.008     .1143138    .7803671
+         17  |   .4744161   .1963055     2.42   0.016     .0896643    .8591678
+         18  |   .5016271   .2220068     2.26   0.024     .0665017    .9367525
+         19  |   .5288295   .2465812     2.14   0.032     .0455392     1.01212
+         20  |   .5558794    .269622     2.06   0.039       .02743    1.084329
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: roads_100
+
+. graph save Graph "H:\DBreault\marten\marginsplot_roads_100_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_roads_100_6jun2019.gph saved)
+
+. 
+. melogit detect cut_100 edge_100 quad_edge_100 roads_100 quad_road_100 cluster year AvgOfAvgOfTemp_C|| gr
+> id_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -309.20492  
+Iteration 1:   log likelihood = -308.53515  
+Iteration 2:   log likelihood = -308.53377  
+Iteration 3:   log likelihood = -308.53377  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -299.61525
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -299.61525  
+Iteration 1:   log likelihood = -298.99508  
+Iteration 2:   log likelihood = -298.87921  
+Iteration 3:   log likelihood = -298.87863  
+Iteration 4:   log likelihood = -298.87863  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(8)      =      18.89
+Log likelihood = -298.87863                     Prob > chi2       =     0.0154
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+         cut_100 |    -.02337    .011416    -2.05   0.041    -.0457449   -.0009951
+        edge_100 |   .1310523   .2583695     0.51   0.612    -.3753427    .6374472
+   quad_edge_100 |  -.0101272   .0480569    -0.21   0.833     -.104317    .0840625
+       roads_100 |   .6405555   .6010908     1.07   0.287    -.5375608    1.818672
+   quad_road_100 |  -.2438534    .161609    -1.51   0.131    -.5606012    .0728944
+         cluster |  -.1328773   .4057775    -0.33   0.743    -.9281866     .662432
+            year |   .6904598   .4222586     1.64   0.102    -.1371519    1.518071
+AvgOfAvgOfTemp_C |  -.1339795    .055406    -2.42   0.016    -.2425732   -.0253857
+           _cons |  -1.228145   .6911409    -1.78   0.076    -2.582756    .1264667
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   .8186808   .3258895                      .3752146     1.78628
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 19.31       Prob >= chibar2 = 0.0000
+
+. summarize quad_road_100
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+quad_roa~100 |        537    3.699571    3.672749          0   15.57586
+
+. margins, at(quad_road_100=(0(1)15.57586)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           0
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           1
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           2
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           3
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           4
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           5
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           6
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           7
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           8
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =           9
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =          10
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+12._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =          11
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+13._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =          12
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+14._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =          13
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+15._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =          14
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+16._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =          15
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .4585441   .1287922     3.56   0.000      .206116    .7109722
+          2  |    .407587   .0938237     4.34   0.000     .2236959    .5914781
+          3  |   .3583538   .0608399     5.89   0.000     .2391097    .4775978
+          4  |   .3116694    .034756     8.97   0.000     .2435489    .3797898
+          5  |   .2682036    .028273     9.49   0.000     .2127894    .3236177
+          6  |   .2284426   .0414918     5.51   0.000     .1471202    .3097649
+          7  |   .1926797   .0566822     3.40   0.001     .0815846    .3037747
+          8  |   .1610234   .0683236     2.36   0.018     .0271115    .2949353
+          9  |   .1334194   .0755938     1.76   0.078    -.0147416    .2815805
+         10  |   .1096818   .0787781     1.39   0.164    -.0447205    .2640841
+         11  |    .089528   .0785363     1.14   0.254    -.0644002    .2434562
+         12  |   .0726141   .0756491     0.96   0.337    -.0756554    .2208836
+         13  |   .0585662   .0708902     0.83   0.409    -.0803761    .1975085
+         14  |   .0470056   .0649528     0.72   0.469    -.0802996    .1743108
+         15  |   .0375686   .0584128     0.64   0.520    -.0769185    .1520557
+         16  |   .0299189   .0517178     0.58   0.563    -.0714462    .1312839
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: quad_road_100
+
+. graph save Graph "H:\DBreault\marten\marginsplot_quad_road_100_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_quad_road_100_6jun2019.gph saved)
+
+. 
+. melogit detect cut_100 edge_100 quad_edge_100 roads_100 quad_road_100 cluster year AvgOfAvgOfTemp_C|| gr
+> id_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -309.20492  
+Iteration 1:   log likelihood = -308.53515  
+Iteration 2:   log likelihood = -308.53377  
+Iteration 3:   log likelihood = -308.53377  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -299.61525
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -299.61525  
+Iteration 1:   log likelihood = -298.99508  
+Iteration 2:   log likelihood = -298.87921  
+Iteration 3:   log likelihood = -298.87863  
+Iteration 4:   log likelihood = -298.87863  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(8)      =      18.89
+Log likelihood = -298.87863                     Prob > chi2       =     0.0154
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+         cut_100 |    -.02337    .011416    -2.05   0.041    -.0457449   -.0009951
+        edge_100 |   .1310523   .2583695     0.51   0.612    -.3753427    .6374472
+   quad_edge_100 |  -.0101272   .0480569    -0.21   0.833     -.104317    .0840625
+       roads_100 |   .6405555   .6010908     1.07   0.287    -.5375608    1.818672
+   quad_road_100 |  -.2438534    .161609    -1.51   0.131    -.5606012    .0728944
+         cluster |  -.1328773   .4057775    -0.33   0.743    -.9281866     .662432
+            year |   .6904598   .4222586     1.64   0.102    -.1371519    1.518071
+AvgOfAvgOfTemp_C |  -.1339795    .055406    -2.42   0.016    -.2425732   -.0253857
+           _cons |  -1.228145   .6911409    -1.78   0.076    -2.582756    .1264667
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   .8186808   .3258895                      .3752146     1.78628
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 19.31       Prob >= chibar2 = 0.0000
+
+. summarize AvgOfAvgOfTemp_C
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+AvgOfAvgOf~C |        537    2.648875    2.381318  -2.487954   7.655108
+
+. margins, at( AvgOfAvgOfTemp_C =(-2.487954 (1)7.655108)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =   -2.487954
+2._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =   -1.487954
+3._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    -.487954
+4._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =     .512046
+5._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    1.512046
+6._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.512046
+7._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    3.512046
+8._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    4.512046
+9._at        : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    5.512046
+10._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    6.512046
+11._at       : cut_100         =    6.563375 (mean)
+               edge_100        =    1.563365 (mean)
+               quad_edg~100    =    5.362311 (mean)
+               roads_100       =    1.674556 (mean)
+               quad_roa~100    =    3.699571 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    7.512046
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .4137666   .0642161     6.44   0.000     .2879054    .5396278
+          2  |   .3863179   .0535037     7.22   0.000     .2814525    .4911832
+          3  |    .359503   .0437626     8.21   0.000       .27373    .4452761
+          4  |   .3334549   .0356149     9.36   0.000     .2636511    .4032588
+          5  |   .3082921   .0298936    10.31   0.000     .2497018    .3668824
+          6  |   .2841171   .0273891    10.37   0.000     .2304355    .3377988
+          7  |   .2610156   .0281106     9.29   0.000     .2059199    .3161113
+          8  |   .2390554   .0310364     7.70   0.000     .1782252    .2998857
+          9  |   .2182868    .034932     6.25   0.000     .1498213    .2867523
+         10  |   .1987425   .0389458     5.10   0.000     .1224102    .2750748
+         11  |   .1804388   .0426077     4.23   0.000     .0969293    .2639484
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: AvgOfAvgOfTemp_C
+
+. graph save Graph "H:\DBreault\marten\marginsplot_AvgofAvgOfTemp_C_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_AvgofAvgOfTemp_C_6jun2019.gph saved)
+
+. 
+. *repeat for distance to marine and distance to riparian models
+. 
+. melogit detect dist_marine quad_marine cluster year AvgOfAvgOfTemp_C|| grid_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -316.61476  
+Iteration 1:   log likelihood = -316.09116  
+Iteration 2:   log likelihood = -316.09086  
+Iteration 3:   log likelihood = -316.09086  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -303.39442
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -303.39442  
+Iteration 1:   log likelihood = -302.69737  
+Iteration 2:   log likelihood = -302.68576  
+Iteration 3:   log likelihood = -302.68573  
+Iteration 4:   log likelihood = -302.68573  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(5)      =      11.66
+Log likelihood = -302.68573                     Prob > chi2       =     0.0398
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+     dist_marine |  -.2648052   .1605564    -1.65   0.099    -.5794899    .0498795
+     quad_marine |   .0183629   .0122911     1.49   0.135    -.0057272     .042453
+         cluster |  -.0247617    .408863    -0.06   0.952    -.8261184    .7765951
+            year |   .4795754   .5065898     0.95   0.344    -.5133225    1.472473
+AvgOfAvgOfTemp_C |  -.1320788   .0552099    -2.39   0.017    -.2402882   -.0238695
+           _cons |  -.4731823   .6917013    -0.68   0.494    -1.828892    .8825274
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   1.032722   .3756149                      .5062792    2.106575
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 26.81       Prob >= chibar2 = 0.0000
+
+. summarize dist_marine
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ dist_marine |        537    6.397778    4.687976   .0390598     14.985
+
+. margins, at( dist_marine =(.0390598 (1)14.985)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : dist_marine     =    .0390598
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : dist_marine     =     1.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : dist_marine     =     2.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : dist_marine     =     3.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : dist_marine     =     4.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : dist_marine     =     5.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : dist_marine     =     6.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : dist_marine     =     7.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : dist_marine     =     8.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : dist_marine     =     9.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : dist_marine     =    10.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+12._at       : dist_marine     =    11.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+13._at       : dist_marine     =    12.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+14._at       : dist_marine     =    13.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+15._at       : dist_marine     =    14.03906
+               quad_marine     =    62.86775 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .618739    .200426     3.09   0.002     .2259112    1.011567
+          2  |    .565988   .1757914     3.22   0.001     .2214432    .9105327
+          3  |   .5118817   .1462535     3.50   0.000     .2252301    .7985333
+          4  |   .4575285   .1137982     4.02   0.000     .2344881    .6805689
+          5  |   .4040539   .0808889     5.00   0.000     .2455146    .5625932
+          6  |   .3525225   .0508312     6.94   0.000     .2528951    .4521499
+          7  |   .3038675   .0304658     9.97   0.000     .2441557    .3635793
+          8  |   .2588348   .0319039     8.11   0.000     .1963044    .3213652
+          9  |   .2179505   .0459442     4.74   0.000     .1279014    .3079995
+         10  |   .1815116   .0592027     3.07   0.002     .0654764    .2975467
+         11  |    .149599   .0684626     2.19   0.029     .0154149    .2837832
+         12  |   .1221073   .0733902     1.66   0.096    -.0217348    .2659494
+         13  |   .0987839   .0744632     1.33   0.185    -.0471613    .2447292
+         14  |   .0792734    .072449     1.09   0.274    -.0627241    .2212709
+         15  |   .0631596   .0681861     0.93   0.354    -.0704828    .1968019
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: dist_marine
+
+. graph save Graph "H:\DBreault\marten\marginsplot_dist_marine_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_dist_marine_6jun2019.gph saved)
+
+. 
+. melogit detect dist_marine quad_marine cluster year AvgOfAvgOfTemp_C|| grid_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -316.61476  
+Iteration 1:   log likelihood = -316.09116  
+Iteration 2:   log likelihood = -316.09086  
+Iteration 3:   log likelihood = -316.09086  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -303.39442
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -303.39442  
+Iteration 1:   log likelihood = -302.69737  
+Iteration 2:   log likelihood = -302.68576  
+Iteration 3:   log likelihood = -302.68573  
+Iteration 4:   log likelihood = -302.68573  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(5)      =      11.66
+Log likelihood = -302.68573                     Prob > chi2       =     0.0398
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+     dist_marine |  -.2648052   .1605564    -1.65   0.099    -.5794899    .0498795
+     quad_marine |   .0183629   .0122911     1.49   0.135    -.0057272     .042453
+         cluster |  -.0247617    .408863    -0.06   0.952    -.8261184    .7765951
+            year |   .4795754   .5065898     0.95   0.344    -.5133225    1.472473
+AvgOfAvgOfTemp_C |  -.1320788   .0552099    -2.39   0.017    -.2402882   -.0238695
+           _cons |  -.4731823   .6917013    -0.68   0.494    -1.828892    .8825274
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   1.032722   .3756149                      .5062792    2.106575
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 26.81       Prob >= chibar2 = 0.0000
+
+. summarize quad_marine
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ quad_marine |        537    62.86775     58.7622   .0015257   224.5502
+
+. margins, at( quad_marine =(.0015257  (10)224.5502)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    .0015257
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    10.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    20.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    30.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    40.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    50.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    60.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    70.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : dist_marine     =    6.397778 (mean)
+               quad_marine     =    80.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    90.00153
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    100.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+12._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    110.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+13._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    120.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+14._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    130.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+15._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    140.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+16._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    150.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+17._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    160.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+18._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    170.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+19._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    180.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+20._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    190.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+21._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    200.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+22._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    210.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+23._at       : dist_marine     =    6.397778 (mean)
+               quad_marine     =    220.0015
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1294205   .0794636     1.63   0.103    -.0263253    .2851663
+          2  |   .1488671   .0751568     1.98   0.048     .0015625    .2961717
+          3  |   .1704404    .068489     2.49   0.013     .0362044    .3046763
+          4  |   .1941861   .0594447     3.27   0.001     .0776766    .3106956
+          5  |   .2201098   .0483678     4.55   0.000     .1253107    .3149089
+          6  |   .2481706   .0365837     6.78   0.000     .1764679    .3198732
+          7  |   .2782771   .0285487     9.75   0.000     .2223226    .3342315
+          8  |   .3102848   .0328701     9.44   0.000     .2458606    .3747091
+          9  |   .3439963   .0493141     6.98   0.000     .2473423    .4406502
+         10  |   .3791631   .0714514     5.31   0.000     .2391209    .5192053
+         11  |   .4154916   .0960631     4.33   0.000     .2272114    .6037717
+         12  |   .4526505   .1215792     3.72   0.000     .2143596    .6909414
+         13  |   .4902813    .146905     3.34   0.001     .2023528    .7782098
+         14  |   .5280095   .1711177     3.09   0.002      .192625    .8633941
+         15  |   .5654575   .1934048     2.92   0.003     .1863912    .9445239
+         16  |   .6022569   .2130664     2.83   0.005     .1846544    1.019859
+         17  |   .6380611   .2295366     2.78   0.005     .1881777    1.087945
+         18  |   .6725559    .242403     2.77   0.006     .1974548    1.147657
+         19  |   .7054689   .2514204     2.81   0.005      .212694    1.198244
+         20  |   .7365757    .256513     2.87   0.004     .2338195    1.239332
+         21  |   .7657045   .2577656     2.97   0.003     .2604932    1.270916
+         22  |   .7927368   .2554054     3.10   0.002     .2921513    1.293322
+         23  |    .817606   .2497765     3.27   0.001      .328053    1.307159
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: quad_marine
+
+. graph save Graph "H:\DBreault\marten\marginsplot_quad_marine_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_quad_marine_6jun2019.gph saved)
+
+. 
+. melogit detect dist_riparian quad_riparian cluster year AvgOfAvgOfTemp_C|| grid_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -317.29758  
+Iteration 1:   log likelihood =  -316.6686  
+Iteration 2:   log likelihood = -316.66826  
+Iteration 3:   log likelihood = -316.66826  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -303.56643
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -303.56643  
+Iteration 1:   log likelihood = -302.82956  
+Iteration 2:   log likelihood =  -302.8169  
+Iteration 3:   log likelihood = -302.81686  
+Iteration 4:   log likelihood = -302.81686  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(5)      =      11.18
+Log likelihood = -302.81686                     Prob > chi2       =     0.0479
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+   dist_riparian |  -1.299167   1.009858    -1.29   0.198    -3.278453    .6801195
+   quad_riparian |   .9105049   .5794378     1.57   0.116    -.2251723    2.046182
+         cluster |   .1784547   .4209434     0.42   0.672    -.6465792    1.003489
+            year |   1.003456    .442483     2.27   0.023     .1362051    1.870707
+AvgOfAvgOfTemp_C |  -.1334679    .055251    -2.42   0.016    -.2417579   -.0251779
+           _cons |  -1.173736   .5309577    -2.21   0.027    -2.214394   -.1330779
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   1.047695    .377178                      .5173635     2.12165
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 27.70       Prob >= chibar2 = 0.0000
+
+. summarize dist_riparian
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+dist_ripar~n |        537    .4769045    .3795376   .0368665   2.285872
+
+. margins, at( dist_riparian =(.0368665 (0.2)2.285872)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : dist_ripar~n    =    .0368665
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : dist_ripar~n    =    .2368665
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : dist_ripar~n    =    .4368665
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : dist_ripar~n    =    .6368665
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : dist_ripar~n    =    .8368665
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : dist_ripar~n    =    1.036866
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : dist_ripar~n    =    1.236866
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : dist_ripar~n    =    1.436866
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : dist_ripar~n    =    1.636866
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : dist_ripar~n    =    1.836866
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : dist_ripar~n    =    2.036866
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+12._at       : dist_ripar~n    =    2.236867
+               quad_ripar~n    =    .3712185 (mean)
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .3939047   .0925388     4.26   0.000     .2125319    .5752775
+          2  |   .3439007   .0542764     6.34   0.000     .2375209    .4502805
+          3  |   .2967895   .0294707    10.07   0.000     .2390281     .354551
+          4  |   .2532396   .0372769     6.79   0.000     .1801782     .326301
+          5  |   .2137147   .0578268     3.70   0.000     .1003762    .3270532
+          6  |   .1784688   .0752665     2.37   0.018     .0309492    .3259885
+          7  |   .1475598   .0871232     1.69   0.090    -.0231985    .3183182
+          8  |   .1208771   .0934156     1.29   0.196    -.0622141    .3039683
+          9  |   .0981776   .0948667     1.03   0.301    -.0877578    .2841129
+         10  |   .0791251   .0924617     0.86   0.392    -.1020965    .2603468
+         11  |   .0633289   .0872398     0.73   0.468     -.107658    .2343157
+         12  |    .050376   .0801707     0.63   0.530    -.1067558    .2075077
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: dist_riparian
+
+. graph save Graph "H:\DBreault\marten\marginsplot_dist_riparian_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_dist_riparian_6jun2019.gph saved)
+
+. 
+. melogit detect dist_riparian quad_riparian cluster year AvgOfAvgOfTemp_C|| grid_cell :, intpoints(10)
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -317.29758  
+Iteration 1:   log likelihood =  -316.6686  
+Iteration 2:   log likelihood = -316.66826  
+Iteration 3:   log likelihood = -316.66826  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -303.56643
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -303.56643  
+Iteration 1:   log likelihood = -302.82956  
+Iteration 2:   log likelihood =  -302.8169  
+Iteration 3:   log likelihood = -302.81686  
+Iteration 4:   log likelihood = -302.81686  
+
+Mixed-effects logistic regression               Number of obs     =        537
+Group variable:       grid_cell                 Number of groups  =         72
+
+                                                Obs per group:
+                                                              min =          5
+                                                              avg =        7.5
+                                                              max =          9
+
+Integration method: mvaghermite                 Integration pts.  =         10
+
+                                                Wald chi2(5)      =      11.18
+Log likelihood = -302.81686                     Prob > chi2       =     0.0479
+----------------------------------------------------------------------------------
+          detect |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+   dist_riparian |  -1.299167   1.009858    -1.29   0.198    -3.278453    .6801195
+   quad_riparian |   .9105049   .5794378     1.57   0.116    -.2251723    2.046182
+         cluster |   .1784547   .4209434     0.42   0.672    -.6465792    1.003489
+            year |   1.003456    .442483     2.27   0.023     .1362051    1.870707
+AvgOfAvgOfTemp_C |  -.1334679    .055251    -2.42   0.016    -.2417579   -.0251779
+           _cons |  -1.173736   .5309577    -2.21   0.027    -2.214394   -.1330779
+-----------------+----------------------------------------------------------------
+grid_cell        |
+       var(_cons)|   1.047695    .377178                      .5173635     2.12165
+----------------------------------------------------------------------------------
+LR test vs. logistic model: chibar2(01) = 27.70       Prob >= chibar2 = 0.0000
+
+. summarize quad_riparian
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+quad_ripar~n |        537    .3712185    .6488715   .0013591    5.22521
+
+. margins, at( quad_riparian =(.0013591  (0.5)5.22521)) atmeans vsquish post
+
+Adjusted predictions                            Number of obs     =        537
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+1._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    .0013591
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+2._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    .5013591
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+3._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    1.001359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+4._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    1.501359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+5._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    2.001359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+6._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    2.501359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+7._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    3.001359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+8._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    3.501359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+9._at        : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    4.001359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+10._at       : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    4.501359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+11._at       : dist_ripar~n    =    .4769045 (mean)
+               quad_ripar~n    =    5.001359
+               cluster         =    .6759777 (mean)
+               year            =    .5903166 (mean)
+               AvgOfAvgOf~C    =    2.648875 (mean)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .2331017   .0413884     5.63   0.000     .1519819    .3142216
+          2  |    .308527   .0320522     9.63   0.000     .2457057    .3713482
+          3  |   .3943112   .0782662     5.04   0.000     .2409122    .5477103
+          4  |   .4862845   .1375762     3.53   0.000     .2166401    .7559289
+          5  |   .5790861   .1913742     3.03   0.002     .2039995    .9541727
+          6  |    .667191   .2289981     2.91   0.004     .2183631    1.116019
+          7  |   .7459911   .2448389     3.05   0.002     .2661157    1.225866
+          8  |   .8125669   .2390174     3.40   0.001     .3441014    1.281032
+          9  |   .8659157    .216276     4.00   0.000     .4420226    1.289809
+         10  |   .9066698   .1835986     4.94   0.000     .5468231    1.266516
+         11  |   .9365265   .1477835     6.34   0.000     .6468761    1.226177
+------------------------------------------------------------------------------
+
+. marginsplot, recast(line) recastci(rarea)
+
+  Variables that uniquely identify margins: quad_riparian
+
+. graph save Graph "H:\DBreault\marten\marginsplot_quad_riparian_6jun2019.gph", replace
+(file H:\DBreault\marten\marginsplot_quad_riparian_6jun2019.gph saved)
+
+. 
+. save biweek_detect_covariates_18dec2018_v08.dta, replace clear
+option clear not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. log close
+      name:  <unnamed>
+       log:  H:\DBreault\marten\log_margins_6jun2019.log
+  log type:  text
+ closed on:   1 Sep 2019, 16:01:07
+----------------------------------------------------------------------------------------------------------
